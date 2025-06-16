@@ -1,6 +1,7 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import 'react-native-reanimated';
+import { UserProvider } from '../context/UserContext';
 
 
 export default function RootLayout() {
@@ -14,8 +15,28 @@ export default function RootLayout() {
   }
 
   return (
+    <UserProvider>
       <Stack>
         <Stack.Screen name="+not-found" />
+        <Stack.Screen
+          name="Pregunta"
+          options={{
+            title: 'Pregunta',
+            headerTitleStyle: {
+              fontFamily: 'SpaceMono',
+              fontSize: 24,
+            },
+          }} />
+        <Stack.Screen
+          name="ListaPreguntas"
+          options={{
+            title: 'Lista de Preguntas',
+            headerTitleStyle: {
+              fontFamily: 'SpaceMono',
+              fontSize: 24,
+            },
+          }} />
       </Stack>
+    </UserProvider>
   );
 }

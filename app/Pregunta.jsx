@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import "./PreguntaPage.css";
-import { useUser } from "../../context/UserContext";
-import { Button } from "react-native-web";
+import { useUser } from "../context/UserContext";
+import { useLocalSearchParams } from "expo-router";
+import { View, Text, Button, Touchable, TouchableOpacity } from "react-native";
 
 function PreguntaPage() {
 
@@ -10,8 +10,9 @@ function PreguntaPage() {
     const [respuestaAnt, setRespuestaAnt] = useState(false);
     const [idResp, setIdResp] = useState("");
     const [lastUpdate, setLastUpdate] = useState("");
-    const { getCurrentUser } = useUser()
-        ;
+    const { getCurrentUser } = useUser();
+    
+    const { id } = useLocalSearchParams();
 
     function getCurrentDateTime() {
         var currentdate = new Date();
@@ -25,10 +26,9 @@ function PreguntaPage() {
     }
 
     useEffect(() => {
-        // Fetch the product details using async/await
         const fetchQs = async () => {
             try {
-                const urlQ = `http://localhost:3000/preguntas/${params.idPregunta}`;
+                const urlQ = `http://localhost:3000/preguntas/${id}`;
                 const resQ = await fetch(urlQ);
                 const dataQ = await resQ.json();
                 setPregunta(dataQ);
@@ -37,14 +37,13 @@ function PreguntaPage() {
             }
         };
 
-
         const userId = getCurrentUser().id;
-        console.log("user: ", userId);
         const fetchAs = async () => {
             try {
-                const urlA = `http://localhost:3000/respuestas/?id_usuario=${userId}&id_pregunta=${params.idPregunta}`;
+                const urlA = `http://localhost:3000/respuestas/?id_usuario=${userId}&id_pregunta=${id}`;
                 const resA = await fetch(urlA);
                 const dataA = await resA.json();
+                console.log("DATA RESPUESTA", dataA);
                 if (dataA[0]) {
                     setRespuestaAnt(true);
                     setRespuesta(dataA[0].valor);
@@ -58,7 +57,7 @@ function PreguntaPage() {
 
         fetchQs();
         fetchAs();
-    }, [params.idCuestionario, params.idPregunta]);
+    }, [id]);
 
     const cargarJson = async () => {
         const fecha = getCurrentDateTime();
@@ -66,7 +65,6 @@ function PreguntaPage() {
         const userId = getCurrentUser().id;
         if (respuestaAnt) {
             try {
-                console.log("tiempo", lastUpdate);
                 const res = await fetch(`http://localhost:3000/respuestas/${idResp}`, {
                     method: "PATCH",
                     headers: {
@@ -108,7 +106,6 @@ function PreguntaPage() {
     };
 
     const handleChange = (event) => {
-        console.log("a:", respuestaAnt);
         setRespuesta(event.target.value);
     };
 
@@ -120,7 +117,8 @@ function PreguntaPage() {
         <View className="pregunta">
             <Text>{pregunta.nombre}</Text>
             {pregunta.opciones ? (
-                {pregunta.opciones.map((opcion, idx) => (
+                <>
+                    {pregunta.opciones.map((opcion, idx) => (
                         <label
                             key={idx}
                         >
@@ -133,7 +131,8 @@ function PreguntaPage() {
                             />
                             <span>{opcion}</span>
                         </label>))
-                }
+                    }
+                </>
             ) : (
                 <input
                     type="text"
@@ -142,7 +141,7 @@ function PreguntaPage() {
                     onChange={handleChange}
                 />
             )}
-            <Button onClick={cargarJson}>Guardar respuesta</Button>
+            <TouchableOpacity onPress={cargarJson}> Cargar Respuesta </TouchableOpacity>
             <Text>{lastUpdate}</Text>
         </View>
     );
