@@ -1,6 +1,8 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
+import { UserProvider } from "../contexts/UserContext";
 
 
 export default function RootLayout() {
@@ -14,9 +16,14 @@ export default function RootLayout() {
   }
 
   return (
+    <UserProvider>
       <Stack>
-        <Stack.Screen name="index" options={{ title: 'Cuestionario' }}/>\
+        <Stack.Screen name="index" options={{ title: 'Cuestionario' }}/>
+        <Stack.Screen name="CuestionariosPage" options={{ title: 'Cuestionarios' }}/>
+        <Stack.Screen name="preguntas" options={{ title: 'Preguntas' }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
+        <Toast />
+    </UserProvider>
   );
 }

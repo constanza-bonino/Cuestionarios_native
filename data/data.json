@@ -1,0 +1,195 @@
+{
+  "cuestionarios": [
+    {
+      "id": "1",
+      "nombre": "Favoritos",
+      "descripcion": "cuentanos lo que prefieres"
+    },
+    {
+      "id": "2",
+      "nombre": "Películas",
+      "descripcion": "preguntas variadas de las películas más conocidas"
+    },
+    {
+      "id": "3",
+      "nombre": "Disney",
+      "descripcion": "desmuestra cuanto sabes sobre Disney"
+    }
+  ],
+  "preguntas": [
+    {
+      "id": "1",
+      "id_cuestionario": "1",
+      "opciones": [
+        "Choco",
+        "Vaini",
+        "dad"
+      ],
+      "nombre": "Helados favoritos?"
+    },
+    {
+      "id": "2",
+      "id_cuestionario": "1",
+      "nombre": "Color favoritas?"
+    },
+    {
+      "id": "3",
+      "id_cuestionario": "1",
+      "nombre": "Deporte favoritos?"
+    },
+    {
+      "id": "4",
+      "id_cuestionario": "2",
+      "tipo": "texto",
+      "nombre": "Última que viste"
+    },
+    {
+      "id": "5",
+      "id_cuestionario": "2",
+      "tipo": "texto",
+      "nombre": "Favoríta"
+    },
+    {
+      "id": "6",
+      "id_cuestionario": "2",
+      "tipo": "texto",
+      "nombre": "Menos favorita"
+    },
+    {
+      "id": "7",
+      "id_cuestionario": "3",
+      "tipo": "texto",
+      "nombre": "Personaje favorito"
+    },
+    {
+      "id": "8",
+      "id_cuestionario": "3",
+      "tipo": "texto",
+      "nombre": "Pelicula favorita"
+    },
+    {
+      "id": "9",
+      "id_cuestionario": "3",
+      "tipo": "texto",
+      "nombre": "Primeros recuerdos"
+    },
+    {
+      "id": "2cb8",
+      "nombre": "prueba2"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Juan"
+    },
+    {
+      "id": "2",
+      "nombre": "Pedro"
+    },
+    {
+      "id": "3",
+      "nombre": "Jose"
+    },
+    {
+      "id": "c014",
+      "nombre": "hola"
+    },
+    {
+      "id": "7254",
+      "nombre": "da"
+    },
+    {
+      "id": "d646",
+      "nombre": "cdcdcdcd"
+    },
+    {
+      "id": "73f5",
+      "nombre": "dwdwd"
+    },
+    {
+      "id": "482c",
+      "nombre": "feefefe"
+    },
+    {
+      "id": "44ce",
+      "nombre": "dwdw"
+    },
+    {
+      "id": "e808",
+      "nombre": "rr"
+    },
+    {
+      "id": "9c3e",
+      "nombre": "dw"
+    },
+    {
+      "id": "64b9",
+      "nombre": "dada"
+    },
+    {
+      "id": "0fd4",
+      "nombre": "ccdc"
+    },
+    {
+      "id": "f952",
+      "nombre": "dadwa"
+    },
+    {
+      "id": "0870",
+      "nombre": "nj"
+    },
+    {
+      "id": "4853",
+      "nombre": "dad"
+    },
+    {
+      "id": "05be",
+      "nombre": "wdawd"
+    },
+    {
+      "id": "43d1",
+      "nombre": "cfd"
+    },
+    {
+      "id": "49e1",
+      "nombre": "Mandakjwd"
+    },
+    {
+      "id": "df9a",
+      "nombre": "Juannjk"
+    },
+    {
+      "id": "2cde",
+      "nombre": "Juannjkcnk"
+    },
+    {
+      "id": "58bf",
+      "nombre": "dadaw"
+    },
+    {
+      "id": "0717",
+      "nombre": "rernjk"
+    }
+  ],
+  "respuestas": [
+    {
+      "id": "1",
+      "id_usuario": "1",
+      "id_pregunta": "4",
+      "valor": "Up"
+    },
+    {
+      "id": "2",
+      "id_usuario": "2",
+      "id_pregunta": "4",
+      "valor": "Up"
+    },
+    {
+      "id": "3",
+      "id_usuario": "1",
+      "id_pregunta": "5",
+      "valor": "Up"
+    }
+  ]
+}
