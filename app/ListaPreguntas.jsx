@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Link, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 function ListaPreguntasPage() {
     const { idCuestionario } = useLocalSearchParams();

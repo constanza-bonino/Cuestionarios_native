@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useLocalSearchParams } from "expo-router";
-import { View, Text, Button, Touchable, TouchableOpacity } from "react-native";
+import { View, Text, Button, Touchable, TouchableOpacity, TextInput } from "react-native";
+
 
 function PreguntaPage() {
 
@@ -105,9 +106,6 @@ function PreguntaPage() {
         }
     };
 
-    const handleChange = (event) => {
-        setRespuesta(event.target.value);
-    };
 
     // We want to render some loading state if the product is not yet loaded 👇
     if (!pregunta) return <p>Cargando pregunta...</p>;
@@ -119,26 +117,20 @@ function PreguntaPage() {
             {pregunta.opciones ? (
                 <>
                     {pregunta.opciones.map((opcion, idx) => (
-                        <label
-                            key={idx}
+                        <TouchableOpacity key={idx} className="opcion" onPress={() => setRespuesta(opcion)} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 5, padding: 10, borderRadius: 5, backgroundColor: 'lightgray' }}
                         >
-                            <input
-                                type="radio"
-                                name="choice"
-                                value={opcion}
-                                checked={respuesta === opcion}
-                                onChange={handleChange}
-                            />
-                            <span>{opcion}</span>
-                        </label>))
+                            <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: respuesta === opcion ? 'magenta' : 'gray', marginRight: 10 }} />
+                            <Text>{opcion}</Text>
+                        </TouchableOpacity>))
                     }
                 </>
             ) : (
-                <input
+                <TextInput
                     type="text"
                     placeholder="Ingrese su respuesta"
-                    value={respuesta}
-                    onChange={handleChange}
+                    defaultValue={respuesta}
+                    style={{ borderWidth: 1, borderColor: 'gray', padding: 5, borderRadius: 5, marginVertical: 10, backgroundColor: 'white' }}
+                onChangeText={(text) => setRespuesta(text)}
                 />
             )}
             <TouchableOpacity onPress={cargarJson}> Cargar Respuesta </TouchableOpacity>

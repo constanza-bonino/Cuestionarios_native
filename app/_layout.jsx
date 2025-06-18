@@ -2,6 +2,7 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import 'react-native-reanimated';
 import { UserProvider } from '../context/UserContext';
+import CrearPregunta from './CrearPregunta';
 
 
 export default function RootLayout() {
@@ -31,6 +32,15 @@ export default function RootLayout() {
           name="ListaPreguntas"
           options={{
             title: 'Lista de Preguntas',
+            headerTitleStyle: {
+              fontFamily: 'SpaceMono',
+              fontSize: 24,
+            },
+          }} />
+        <Stack.Screen
+          name="CrearPregunta"
+          options={{
+            title: 'Crear Pregunta',
             headerTitleStyle: {
               fontFamily: 'SpaceMono',
               fontSize: 24,

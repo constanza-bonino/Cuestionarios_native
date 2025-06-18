@@ -208,6 +208,20 @@
       "id_pregunta": "1",
       "valor": "Choco",
       "fechaHora": "Last Sync: 21/5/2025     17:8:0"
+    },
+    {
+      "id": "4fcf",
+      "id_usuario": "1",
+      "id_pregunta": "2",
+      "valor": "rosa",
+      "fechaHora": "Last Sync: 16/6/2025     19:16:28"
+    },
+    {
+      "id": "dc26",
+      "id_usuario": "1",
+      "id_pregunta": "1",
+      "valor": "dad",
+      "fechaHora": "Last Sync: 16/6/2025     18:51:1"
     }
   ]
 }
