@@ -8,7 +8,7 @@ import {
 	View,
 } from "react-native";
 import Toast from "react-native-toast-message";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../context/UserContext";
 
 function Login() {
     const usuarioActual = useRef(null);
@@ -79,6 +79,10 @@ function Login() {
                 />
                 <TouchableOpacity style={styles.loginBtn} onPress={logIn}>
                     <Text style={styles.btnText}>Ingresar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.loginBtn} onPress={() => setCurrentUser(null)}>
+                    <Text style={styles.btnText}>cerrar sesión</Text>
                 </TouchableOpacity>
             </View>
         </View>

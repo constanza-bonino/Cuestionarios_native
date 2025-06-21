@@ -2,9 +2,12 @@ import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
+import { useNavigation } from "expo-router";
 
 function ListaPreguntas() {
+    const navigate = useNavigation();
     const { idCuestionario } = useLocalSearchParams();
+    console.log(idCuestionario);
 
     const [cuestionario, setCuestionario] = useState(null);
     const [preguntas, setPreguntas] = useState(null);
@@ -12,9 +15,10 @@ function ListaPreguntas() {
     useEffect(() => {
         const fetchQs = async () => {
             try {
-                const urlQ = `http://localhost:3000/preguntas/?id_cuestionario=${idCuestionario}`;
+                const urlQ = `http://localhost:3000/preguntas?id_cuestionario=${idCuestionario}`;
                 const resQ = await fetch(urlQ);
                 const dataQ = await resQ.json();
+                console.log("DATA PREGUNTAs", dataQ);
                 setPreguntas(dataQ);
             } catch (err) {
                 console.error("Failed to fetch:", err);
@@ -23,9 +27,10 @@ function ListaPreguntas() {
 
         const fetchDataCuestionario = async () => {
             try {
-                const url = `http://localhost:3000/cuestionarios/${idCuestionario}`;
+                const url = `http://localhost:3000/cuestionarios?id=${idCuestionario}`;
                 const res = await fetch(url);
                 const data = await res.json();
+                console.log("DATA Cuestionario", data);
                 setCuestionario(data);
             } catch (err) {
                 console.error("Failed to fetch:", err);
@@ -53,9 +58,6 @@ function ListaPreguntas() {
                     asChild
                 >
                     <TouchableOpacity 
-                        style={[styles.questionItem, 
-                            { backgroundColor: getQuestionColor(index) || '#F8FAFC' }]}
-                        activeOpacity={0.7}
                     >
                         <View style={styles.questionNumber}>
                             <Text style={styles.questionNumberText}>{index + 1}</Text>
@@ -70,6 +72,8 @@ function ListaPreguntas() {
                     </TouchableOpacity>
                 </Link>
             ))}
+
+            <TouchableOpacity onPress={() => navigate.navigate('CrearPregunta', { idCuestionario: idCuestionario })}>Crear Pregunta</TouchableOpacity>
         </View>
     );
 }

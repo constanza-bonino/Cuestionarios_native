@@ -1,11 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function CrearPregunta() {
+        const showToast = (message) => {
+            Toast.show({
+                type: "success",
+                text1: message,
+            });
+        };
 
     const { idCuestionario } = useLocalSearchParams();
+    console.log(idCuestionario);
 
     const [nombre, setNombre] = useState("");
     const [type, setType] = useState(null);
@@ -39,7 +46,7 @@ export default function CrearPregunta() {
 
     };
 
-    const isButtonDisabled = (type !== "MO" || completo) && (nombre.trim() !== "");
+    const isButtonDisabled = !((type === "text" || completo) && (nombre.trim() !== ""));
 
 
     const cargarJson = async () => {
@@ -52,6 +59,7 @@ export default function CrearPregunta() {
                     },
                     body: JSON.stringify({
                         id_cuestionario: idCuestionario,
+                        tipo: "MO",
                         opciones: [
                             opciones[0],
                             opciones[1],
@@ -62,6 +70,9 @@ export default function CrearPregunta() {
                 });
                 if (!res.ok) throw new Error("Error al agregar post");
                 const responseData = await res.json();
+                setNombre("");
+                setType(null);
+                showToast(`Pregunta guardada correctamente`);
                 return responseData;
             } catch (err) {
                 console.error(err);
@@ -75,11 +86,15 @@ export default function CrearPregunta() {
                     },
                     body: JSON.stringify({
                         id_cuestionario: idCuestionario,
+                        tipo: "texto",
                         nombre: nombre
                     })
                 });
                 if (!res.ok) throw new Error("Error al agregar post");
                 const responseData = await res.json();
+                setNombre("");
+                setType(null);
+                showToast(`Pregunta guardada correctamente`);
                 return responseData;
             } catch (err) {
                 console.error(err);
@@ -95,6 +110,7 @@ export default function CrearPregunta() {
             <TextInput
                 type="text"
                 placeholder="Ingrese el nombre de la pregunta"
+                value={nombre}
                 onChangeText={(text) => setNombre(text)}
                 style={styles.input}
             />
@@ -119,7 +135,7 @@ export default function CrearPregunta() {
                     <TextInput type="text" id="2" onChange={handleInputChange} style={styles.input}></TextInput>
                 </>
             )}
-            <TouchableOpacity onClick={cargarJson} disabled={isButtonDisabled}>Guardar pregunta</TouchableOpacity>
+            <TouchableOpacity onPress={cargarJson} disabled={isButtonDisabled}><Text>Guardar pregunta</Text></TouchableOpacity>
         </View>
     );
 }

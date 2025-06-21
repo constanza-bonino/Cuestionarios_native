@@ -72,20 +72,6 @@
       "id_cuestionario": "3",
       "tipo": "texto",
       "nombre": "Primeros recuerdos"
-    },
-    {
-      "id": "2cb8",
-      "nombre": "prueba2"
-    },
-    {
-      "id": "9ef9",
-      "id_cuestionario": "1",
-      "opciones": [
-        "hola",
-        "como",
-        "estas"
-      ],
-      "nombre": ""
     }
   ],
   "usuarios": [
@@ -171,22 +157,15 @@
       "id": "54b1",
       "id_usuario": "c443",
       "id_pregunta": "1",
-      "valor": "dad",
-      "fechaHora": "Last Sync: 21/5/2025     17:7:11"
+      "valor": "Vaini",
+      "fechaHora": "Last Sync: 21/6/2025     19:2:50"
     },
     {
       "id": "c11b",
       "id_usuario": "c443",
       "id_pregunta": "2",
-      "valor": "rodass",
-      "fechaHora": "Last Sync: 21/5/2025     15:25:51"
-    },
-    {
-      "id": "b1e9",
-      "id_usuario": "c443",
-      "id_pregunta": "2cb8",
-      "valor": "ggy",
-      "fechaHora": ""
+      "valor": "jdknejikad",
+      "fechaHora": "Last Sync: 21/6/2025     19:3:0"
     },
     {
       "id": "cb4d",

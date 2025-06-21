@@ -31,8 +31,7 @@ function Cuestionarios() {
                 <Link
                     style={styles.link}
                     key={"cuestionario" + cuestionario.id}
-                    href={`/cuestionarios/params?id=${cuestionario.id}`}
-                >
+                    href={{ pathname: '/ListaPreguntas', params: { idCuestionario: cuestionario.id} }} >
                     {" "}
                     <span style={styles.titulo}>
                         {cuestionario.nombre}
