@@ -1,8 +1,7 @@
-import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
-import { useNavigation } from "expo-router";
+import { Link, useLocalSearchParams, useNavigation } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 function ListaPreguntas() {
     const navigate = useNavigation();
@@ -12,34 +11,36 @@ function ListaPreguntas() {
     const [cuestionario, setCuestionario] = useState(null);
     const [preguntas, setPreguntas] = useState(null);
 
-    useEffect(() => {
-        const fetchQs = async () => {
-            try {
-                const urlQ = `http://localhost:3000/preguntas?id_cuestionario=${idCuestionario}`;
-                const resQ = await fetch(urlQ);
-                const dataQ = await resQ.json();
-                console.log("DATA PREGUNTAs", dataQ);
-                setPreguntas(dataQ);
-            } catch (err) {
-                console.error("Failed to fetch:", err);
-            }
-        };
+    useFocusEffect(
+        useCallback(() => {
+            const fetchQs = async () => {
+                try {
+                    const urlQ = `http://localhost:3000/preguntas?id_cuestionario=${idCuestionario}`;
+                    const resQ = await fetch(urlQ);
+                    const dataQ = await resQ.json();
+                    console.log("DATA PREGUNTAs", dataQ);
+                    setPreguntas(dataQ);
+                } catch (err) {
+                    console.error("Failed to fetch:", err);
+                }
+            };
 
-        const fetchDataCuestionario = async () => {
-            try {
-                const url = `http://localhost:3000/cuestionarios?id=${idCuestionario}`;
-                const res = await fetch(url);
-                const data = await res.json();
-                console.log("DATA Cuestionario", data);
-                setCuestionario(data);
-            } catch (err) {
-                console.error("Failed to fetch:", err);
+            const fetchDataCuestionario = async () => {
+                try {
+                    const url = `http://localhost:3000/cuestionarios?id=${idCuestionario}`;
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    console.log("DATA Cuestionario", data);
+                    setCuestionario(data);
+                } catch (err) {
+                    console.error("Failed to fetch:", err);
+                }
             }
-        }
 
-        fetchQs();
-        fetchDataCuestionario();
-    }, [idCuestionario]);
+            fetchQs();
+            fetchDataCuestionario();
+        }, [idCuestionario])
+    );
 
     if (!preguntas || !cuestionario) return <Text>Cargando preguntas...</Text>;
     console.log("Preguntas: ", preguntas);
@@ -57,7 +58,7 @@ function ListaPreguntas() {
                     }}
                     asChild
                 >
-                    <TouchableOpacity 
+                    <TouchableOpacity
                     >
                         <View style={styles.questionNumber}>
                             <Text style={styles.questionNumberText}>{index + 1}</Text>
@@ -80,13 +81,13 @@ function ListaPreguntas() {
 
 const getQuestionColor = (index) => {
     const colors = [
-        '#E8F4FD', 
-        '#F0F9E8', 
-        '#FFF2E8', 
-        '#F8E8FF', 
-        '#FFE8F0', 
+        '#E8F4FD',
+        '#F0F9E8',
+        '#FFF2E8',
+        '#F8E8FF',
+        '#FFE8F0',
     ];
-    console.log("color", colors[index % colors.length] );
+    console.log("color", colors[index % colors.length]);
     return colors[index % colors.length];
 };
 

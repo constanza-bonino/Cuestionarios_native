@@ -3,10 +3,12 @@ import { useUser } from "../context/UserContext";
 import { useLocalSearchParams } from "expo-router";
 import { View, Text, Button, Touchable, TouchableOpacity, TextInput } from "react-native";
 
+import Toast from "react-native-toast-message";
+
 
 function PreguntaPage() {
 
-    const [pregunta, setPregunta] = useState(null);
+    const [pregunta, setPregunta] = useState(null); 
     const [respuesta, setRespuesta] = useState(null);
     const [respuestaAnt, setRespuestaAnt] = useState(false);
     const [idResp, setIdResp] = useState("");
@@ -14,6 +16,13 @@ function PreguntaPage() {
     const { getCurrentUser } = useUser();
     
     const { id } = useLocalSearchParams();
+    const showToast = (message) => {
+            Toast.show({
+                type: "error",
+                text1: message,
+                visibilityTime: 2500
+            });
+        };
 
     function getCurrentDateTime() {
         var currentdate = new Date();
@@ -59,6 +68,14 @@ function PreguntaPage() {
         fetchQs();
         fetchAs();
     }, [id]);
+
+    const checkeoDatos = () => {
+        if (!respuesta) {
+            showToast(`Ingrese una respuesta`);
+            return;
+        }
+        cargarJson();
+    };
 
     const cargarJson = async () => {
         const fecha = getCurrentDateTime();
@@ -133,7 +150,7 @@ function PreguntaPage() {
                 onChangeText={(text) => setRespuesta(text)}
                 />
             )}
-            <TouchableOpacity onPress={cargarJson}> Cargar Respuesta </TouchableOpacity>
+            <TouchableOpacity onPress={checkeoDatos}> Cargar Respuesta </TouchableOpacity>
             <Text>{lastUpdate}</Text>
         </View>
     );
