@@ -1,13 +1,9 @@
-import { Text, View } from 'react-native-web';
+import Login from "../components/Login";
 
-function index(props) {
-	return (
-		<View>
-			<Text>
-				Cuestionario
-			</Text>
-		</View>
-	);
+function index() {
+    return (
+        <Login></Login>
+    );
 }
 
 export default index;
